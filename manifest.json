@@ -1,0 +1,10 @@
+{
+	"id": "quick-tray",
+	"name": "Quick Tray",
+	"version": "0.1.0",
+	"minAppVersion": "1.0.0",
+	"description": "Keep Obsidian running in the Windows tray and provide quick note/search actions.",
+	"author": "",
+	"authorUrl": "",
+	"isDesktopOnly": true
+}

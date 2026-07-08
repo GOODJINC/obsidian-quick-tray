@@ -1,0 +1,67 @@
+.modal:has(.quick-tray-note-modal) {
+	width: min(640px, calc(100vw - 32px));
+}
+
+.quick-tray-note-modal {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+}
+
+.quick-tray-note-modal .setting-item {
+	display: grid;
+	grid-template-columns: clamp(72px, 18%, 128px) minmax(0, 1fr);
+	align-items: start;
+	gap: 10px 14px;
+	padding: 0;
+	border-top: 0;
+}
+
+.quick-tray-note-modal .setting-item-info {
+	min-width: 0;
+	width: auto;
+	padding-top: 6px;
+}
+
+.quick-tray-note-modal .setting-item-name {
+	overflow-wrap: anywhere;
+	line-height: 1.4;
+}
+
+.quick-tray-note-modal .setting-item-control {
+	justify-content: stretch;
+	min-width: 0;
+	width: 100%;
+}
+
+.quick-tray-note-modal textarea {
+	min-height: 240px;
+	width: 100%;
+	resize: vertical;
+}
+
+.quick-tray-note-modal input {
+	width: 100%;
+}
+
+.quick-tray-note-modal .setting-item:last-child {
+	display: flex;
+	justify-content: flex-end;
+	gap: 8px;
+	margin-top: 2px;
+	padding-top: 0;
+}
+
+.quick-tray-note-modal .setting-item:last-child .setting-item-info {
+	display: none;
+}
+
+.quick-tray-note-modal .setting-item:last-child .setting-item-control {
+	justify-content: flex-end;
+	width: auto;
+}
+
+.quick-tray-setting-hint {
+	color: var(--text-muted);
+	font-size: var(--font-ui-smaller);
+}
