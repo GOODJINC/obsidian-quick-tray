@@ -1,8 +1,12 @@
 # Quick Tray
 
-English | [한국어](README.ko.md)
+English | [한국어](https://github.com/GOODJINC/obsidian-quick-tray/blob/main/README.ko.md)
 
 Quick Tray keeps Obsidian available from the system tray and adds quick note/search actions.
+
+## Screenshot
+
+![Quick Tray settings and tray menu](assets/screenshot.png)
 
 ## Features
 

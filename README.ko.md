@@ -4,6 +4,10 @@
 
 Quick Tray는 Obsidian을 시스템 트레이에서 계속 사용할 수 있게 하고, 빠른 노트와 빠른 검색 기능을 추가하는 데스크톱 전용 플러그인입니다.
 
+## 스크린샷
+
+![Quick Tray 설정과 트레이 메뉴](assets/screenshot.png)
+
 ## 기능
 
 - Obsidian을 종료하지 않고 트레이로 숨깁니다.
