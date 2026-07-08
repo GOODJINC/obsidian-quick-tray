@@ -205,13 +205,13 @@ type BrowserWindowInstanceLike = {
 	restore?: () => void;
 	loadURL?: (url: string) => Promise<void>;
 	setMenu?: (menu: unknown) => void;
-	on?: (event: string, callback: (...args: any[]) => void) => void;
-	removeListener?: (event: string, callback: (...args: any[]) => void) => void;
+	on?: (event: string, callback: (...args: unknown[]) => void) => void;
+	removeListener?: (event: string, callback: (...args: unknown[]) => void) => void;
 	webContents?: WebContentsLike;
 };
 
 type WebContentsLike = {
-	on?: (event: string, callback: (...args: any[]) => void) => void;
+	on?: (event: string, callback: (...args: unknown[]) => void) => void;
 };
 
 type GlobalShortcutLike = {
@@ -224,7 +224,7 @@ export default class QuickTrayPlugin extends Plugin {
 	language: SupportedLanguage = "en";
 	private electron: ElectronApi | null = null;
 	private tray: TrayLike | null = null;
-	private closeHandler: ((event: { preventDefault: () => void }) => void) | null = null;
+	private closeHandler: ((event: unknown) => void) | null = null;
 	private beforeUnloadHandler: ((event: BeforeUnloadEvent) => void) | null = null;
 	private registeredGlobalHotkeys: string[] = [];
 	private failedGlobalHotkeys = new Set<string>();
@@ -233,7 +233,8 @@ export default class QuickTrayPlugin extends Plugin {
 	private isQuitting = false;
 
 	async onload(): Promise<void> {
-		this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
+		const loadedSettings = (await this.loadData()) as Partial<QuickTraySettings> | null;
+		this.settings = Object.assign({}, DEFAULT_SETTINGS, loadedSettings);
 		this.language = detectLanguage();
 		this.electron = getElectronApi();
 
@@ -409,7 +410,8 @@ export default class QuickTrayPlugin extends Plugin {
 			if (this.isQuitting) {
 				return;
 			}
-			event.preventDefault();
+			const closeEvent = event as { preventDefault?: () => void };
+			closeEvent.preventDefault?.();
 			win.hide?.();
 		};
 
@@ -419,7 +421,6 @@ export default class QuickTrayPlugin extends Plugin {
 			}
 			event.preventDefault();
 			event.stopImmediatePropagation();
-			event.returnValue = "";
 			this.hideWindow();
 		};
 
@@ -739,6 +740,7 @@ class QuickNoteModal extends Modal {
 
 	onOpen(): void {
 		this.titleEl.setText(this.plugin.t("quickNoteTitle"));
+		this.modalEl.addClass("quick-tray-note-modal-container");
 		this.contentEl.addClass("quick-tray-note-modal");
 
 		new Setting(this.contentEl)
@@ -772,6 +774,7 @@ class QuickNoteModal extends Modal {
 	}
 
 	onClose(): void {
+		this.modalEl.removeClass("quick-tray-note-modal-container");
 		this.contentEl.empty();
 		this.onClosed();
 	}
@@ -951,7 +954,9 @@ class QuickTraySettingTab extends PluginSettingTab {
 		const { containerEl } = this;
 		containerEl.empty();
 
-		containerEl.createEl("h2", { text: this.plugin.t("settingsTitle") });
+		new Setting(containerEl)
+			.setName(this.plugin.t("settingsTitle"))
+			.setHeading();
 
 		new Setting(containerEl)
 			.setName(this.plugin.t("closeToTrayName"))
@@ -1048,7 +1053,9 @@ class QuickTraySettingTab extends PluginSettingTab {
 					});
 			});
 
-		containerEl.createEl("h3", { text: this.plugin.t("globalHotkeys") });
+		new Setting(containerEl)
+			.setName(this.plugin.t("globalHotkeys"))
+			.setHeading();
 		containerEl.createDiv({
 			cls: "quick-tray-setting-hint",
 			text: this.plugin.t("globalHotkeysHint")
@@ -1083,7 +1090,7 @@ function getElectronApi(): ElectronApi | null {
 
 	try {
 		const electron = req("electron") as Record<string, unknown>;
-		const remote = (electron.remote ?? tryRequire(req, "@electron/remote")) as Record<string, unknown> | null;
+		const remote = toRecord(electron.remote) ?? tryRequireRecord(req, "@electron/remote");
 		const source = remote ?? electron;
 
 		return {
@@ -1118,12 +1125,16 @@ function getProcessExecPath(): string | null {
 	return typeof processLike?.execPath === "string" ? processLike.execPath : null;
 }
 
-function tryRequire(req: (id: string) => unknown, id: string): unknown | null {
+function tryRequireRecord(req: (id: string) => unknown, id: string): Record<string, unknown> | null {
 	try {
-		return req(id);
+		return toRecord(req(id));
 	} catch {
 		return null;
 	}
+}
+
+function toRecord(value: unknown): Record<string, unknown> | null {
+	return value && typeof value === "object" ? value as Record<string, unknown> : null;
 }
 
 function escapeHtml(value: string): string {

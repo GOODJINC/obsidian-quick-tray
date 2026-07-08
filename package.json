@@ -1,7 +1,7 @@
 {
 	"name": "obsidian-quick-tray",
-	"version": "1.0.1",
-	"description": "Keep Obsidian available from the Windows tray with quick notes, quick search, and configurable shortcuts.",
+	"version": "1.0.2",
+	"description": "Keep your workspace available from the Windows tray with quick notes, quick search, and configurable shortcuts.",
 	"main": "main.js",
 	"type": "module",
 	"scripts": {
@@ -17,7 +17,6 @@
 	"license": "MIT",
 	"devDependencies": {
 		"@types/node": "^22.15.17",
-		"builtin-modules": "^5.0.0",
 		"esbuild": "0.25.5",
 		"obsidian": "latest",
 		"typescript": "^5.8.3"

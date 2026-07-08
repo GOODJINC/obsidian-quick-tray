@@ -1,4 +1,4 @@
-.modal:has(.quick-tray-note-modal) {
+.quick-tray-note-modal-container {
 	width: min(640px, calc(100vw - 32px));
 }
 
