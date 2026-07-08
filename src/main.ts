@@ -78,7 +78,7 @@ const TRANSLATIONS = {
 		openCreatedNoteName: "Open created note",
 		openCreatedNoteDesc: "Open the quick note in the editor after it is created.",
 		trayIconName: "Tray icon image",
-		trayIconDesc: "Leave blank to use the bundled icon. Enter an absolute ICO or PNG path.",
+		trayIconDesc: "Leave blank to use the current Obsidian app icon. Enter an absolute ICO or PNG path.",
 		trayClickActionName: "Tray icon click action",
 		trayClickActionDesc: "Choose what happens when the tray icon is left-clicked.",
 		quickSearchModeName: "Quick search action",
@@ -123,7 +123,7 @@ const TRANSLATIONS = {
 		openCreatedNoteName: "생성한 노트 열기",
 		openCreatedNoteDesc: "빠른 노트 생성 후 편집 화면으로 엽니다.",
 		trayIconName: "트레이 아이콘 이미지",
-		trayIconDesc: "비워두면 내장 아이콘을 사용합니다. ICO 또는 PNG 절대 경로를 입력하세요.",
+		trayIconDesc: "비워두면 현재 Obsidian 앱 아이콘을 사용합니다. ICO 또는 PNG 절대 경로를 입력하세요.",
 		trayClickActionName: "트레이 아이콘 클릭 동작",
 		trayClickActionDesc: "트레이 아이콘을 왼쪽 클릭했을 때 실행할 동작을 선택합니다.",
 		quickSearchModeName: "빠른 검색 동작",
@@ -135,7 +135,7 @@ const TRANSLATIONS = {
 
 type TranslationKey = keyof typeof TRANSLATIONS.en;
 
-const DEFAULT_TRAY_ICON = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHZSURBVDhPlZKxTxRBFMa/XZcF7nIG7mjxjoRCwomJxgsFdhaASqzQxFDzB1AQKgstLGxIiBQGJBpiCCGx8h+wgYaGgAWNd0dyHofeEYVwt/PmOTMZV9aDIL/s5pvZvPfN9yaL/+HR3eXcypta0m4juFbP5GHuXc9IbunDFc9db/G81/ZzhDMN7g8td47mll4R5BfHwZN4LOaA+fHa259PbUmIYzWkt3e2NZNo3/V9v1vvU6kkstk+tLW3ItUVr/m+c3N8MlkwxYqmBFcbwUQQCNOcyVzDwEAWjuPi5DhAMV/tKOYPX5hCyz8Gz1zX5SmWjBvZfmTSaRBJkGAIoxJHv+pVW2yIGNxOJ8bUVNcFEWLxuG1ia6JercTbttwQTeDwPS0kCMXiXtgk/jQrFUw7ptYSMWApF40yo/ytjHq98fdk3ayVE+cn2CxMb6ruz9qAJKFUKoWza1VJSi/n0+ffgYHdWW2gHuxXymg0gjCB0sjpmiaDnkL3RzDyzLqBUKns2ztQqUR0fk2TwSrGSf1eczqF5vsPZRCQSSAFLk6gqctgQRkc6TWRQLV2YMYQki9OoNkqzFQ9r+WOGuW5CrJbOzyAlPKr6MSGLbkcDwbf35oY/jRkt6cAfgNwowruAMz9AgAAAABJRU5ErkJggg==";
+const FALLBACK_TRAY_ICON = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAFvmlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgMTAuMC1jMDAwIDI1LkcuZDIwZTQ2NiwgMjAyNS8xMi8wOC0yMDo1MDoyMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0RXZ0PSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VFdmVudCMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIDI3LjggKFdpbmRvd3MpIiB4bXA6Q3JlYXRlRGF0ZT0iMjAyNi0wNy0wOFQxNDo1MjowNiswOTowMCIgeG1wOk1vZGlmeURhdGU9IjIwMjYtMDctMDhUMTQ6NTI6NTcrMDk6MDAiIHhtcDpNZXRhZGF0YURhdGU9IjIwMjYtMDctMDhUMTQ6NTI6NTcrMDk6MDAiIGRjOmZvcm1hdD0iaW1hZ2UvcG5nIiBwaG90b3Nob3A6Q29sb3JNb2RlPSIzIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjA5MTUwMTBjLWZjOTEtYzc0MC1iYWUwLTdhYjhkNThkOWFhZSIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozZmFkMjVhNS0xNzFhLTMyNDAtYjcxOC0xMmYyODYxY2MzMTkiIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDozZmFkMjVhNS0xNzFhLTMyNDAtYjcxOC0xMmYyODYxY2MzMTkiPiA8eG1wTU06SGlzdG9yeT4gPHJkZjpTZXE+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJjcmVhdGVkIiBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOjNmYWQyNWE1LTE3MWEtMzI0MC1iNzE4LTEyZjI4NjFjYzMxOSIgc3RFdnQ6d2hlbj0iMjAyNi0wNy0wOFQxNDo1MjowNiswOTowMCIgc3RFdnQ6c29mdHdhcmVBZ2VudD0iQWRvYmUgUGhvdG9zaG9wIDI3LjggKFdpbmRvd3MpIi8+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJzYXZlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDowOTE1MDEwYy1mYzkxLWM3NDAtYmFlMC03YWI4ZDU4ZDlhYWUiIHN0RXZ0OndoZW49IjIwMjYtMDctMDhUMTQ6NTI6NTcrMDk6MDAiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCAyNy44IChXaW5kb3dzKSIgc3RFdnQ6Y2hhbmdlZD0iLyIvPiA8L3JkZjpTZXE+IDwveG1wTU06SGlzdG9yeT4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7pxcxYAAACiklEQVQ4jaWTTUjTcRzGn9//df+X/ede3cSmuS2taWCIRQQZhJ2CokhQOhYUdOkWRZfqEN0kIaGuBUHQoZuRJyHQJILMNNpkTjedb3Nv//dA2HTt6HN6Lt8Pz/P7/r7Etm0cRkzV3Lk+iiqs7+QFVCo6TI1EQt7Iow9fXtyybRg0xdUG3008rgcclKqq4FmhrTkU/imJCh+Th7iZxNsRpyDhf1H7QxWoWgXFYgGiIJ2ORmNJSWH5irGNgDM+fDw8cE+nNsAKFhiHWQMwVdMePgbbtkAIJUVjka+EskBzFlZmLZTNHHo6Lo6a9M5UQc3NMgeqMFUT6w7CMHW4ZO8pyclBM0sghCCfM6F4CWiHiq62syO53cQsQ/ONFbKpPJYTGyju6j3BowScg4AQgKIJBCcNXrRhs8VA2cpCQ64xwef3SzBNC9Oa+4aL20LfoBuriTIkFwWGI3vd3XTTuewODZvSGxMQVocoSnFZls+PPfgOtayhs1dAR9yFQMgFhwQE/M3toiAPZzYWGxOInLdboH0PRRegmwxeP/kBImxhLVWBz+/D4JVemLqKE5EzbzxKyxEAz+sALj48xLH8NUbQ0dblwty3JBb+zMPnd2POSGN7M4/b9y9hJZOezG7/nQTi9QnS5amnfiq63Onrf2WzefhaBFh0KzweD3gHj+xSHhMf582cOXN1bT2jApfrATqTVlfVzLi3LDP9nQMvk8kE3E1eKIoCjmPhiwfxa+73s5JVUHku2PgGgZAMzSghVZ4Y866IRrlg3PX4FSJLUpdTUViW5rGlUZ8ozQmK2r+AmuMdLBxwo2JvYjE1M27YreOqXkDJsNuckG6C0b3rOwvTNMXufbDa9g57zv8AX8jz1zu+4ZcAAAAASUVORK5CYII=";
 
 type ElectronApi = {
 	Tray?: new (image: unknown) => TrayLike;
@@ -149,6 +149,7 @@ type ElectronApi = {
 
 type TrayLike = {
 	setToolTip?: (tooltip: string) => void;
+	setImage?: (image: unknown) => void;
 	setContextMenu?: (menu: unknown) => void;
 	on?: (event: string, callback: () => void) => void;
 	destroy?: () => void;
@@ -168,6 +169,7 @@ type ElectronAppLike = {
 	exit?: (code?: number) => void;
 	quit?: () => void;
 	getPath?: (name: string) => string;
+	getFileIcon?: (path: string, options?: Record<string, unknown>) => Promise<unknown>;
 };
 
 type BrowserWindowLike = {
@@ -449,6 +451,7 @@ export default class QuickTrayPlugin extends Plugin {
 			this.tray.setToolTip?.("Obsidian Quick Tray");
 			this.tray.on?.("click", () => this.runTrayClickAction());
 			this.updateTrayMenu();
+			void this.applyAppTrayIcon();
 		} catch (error) {
 			console.error("Quick Tray: failed to create tray icon.", error);
 			new Notice(this.t("trayIconFailed"));
@@ -509,7 +512,28 @@ export default class QuickTrayPlugin extends Plugin {
 				return customIcon;
 			}
 		}
-		return nativeImage.createFromDataURL(DEFAULT_TRAY_ICON);
+		return nativeImage.createFromDataURL(FALLBACK_TRAY_ICON);
+	}
+
+	private async applyAppTrayIcon(): Promise<void> {
+		if (this.settings.customTrayIconPath.trim()) {
+			return;
+		}
+
+		const app = this.electron?.app;
+		const execPath = getProcessExecPath();
+		if (!this.tray?.setImage || !app?.getFileIcon || !execPath) {
+			return;
+		}
+
+		try {
+			const image = await app.getFileIcon(execPath, { size: "small" });
+			if (this.tray) {
+				this.tray.setImage(image);
+			}
+		} catch (error) {
+			console.error("Quick Tray: failed to load Obsidian app icon.", error);
+		}
 	}
 
 	private registerGlobalHotkeys(showNotices = true): void {
@@ -1087,6 +1111,11 @@ function detectLanguage(): SupportedLanguage {
 function getRequire(): ((id: string) => unknown) | null {
 	const candidate = (window as Window & { require?: (id: string) => unknown }).require;
 	return typeof candidate === "function" ? candidate : null;
+}
+
+function getProcessExecPath(): string | null {
+	const processLike = (window as Window & { process?: { execPath?: string } }).process;
+	return typeof processLike?.execPath === "string" ? processLike.execPath : null;
 }
 
 function tryRequire(req: (id: string) => unknown, id: string): unknown | null {

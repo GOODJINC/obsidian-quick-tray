@@ -1,6 +1,6 @@
 # Quick Tray
 
-[English](README.md) | [한국어](README.ko.md)
+[English](README.md) | 한국어
 
 Quick Tray는 Obsidian을 시스템 트레이에서 계속 사용할 수 있게 하고, 빠른 노트와 빠른 검색 기능을 추가하는 데스크톱 전용 플러그인입니다.
 
@@ -43,4 +43,4 @@ VaultFolder/.obsidian/plugins/quick-tray/
 
 트레이와 OS 전역 단축키는 Electron 데스크톱 API에 의존합니다. 사용 중인 Obsidian 빌드에서 해당 API를 사용할 수 없으면 Quick Tray 명령은 명령 팔레트에서만 사용할 수 있습니다.
 
-기본 트레이 이미지는 Obsidian에서 사용하기 위한 Obsidian 아이콘입니다. Obsidian 로고의 권리는 Obsidian 프로젝트에 있습니다.
+기본 트레이 아이콘은 현재 Obsidian 앱 아이콘을 사용합니다. Obsidian 로고의 권리는 Obsidian 프로젝트에 있습니다.

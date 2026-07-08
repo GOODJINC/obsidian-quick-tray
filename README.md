@@ -1,6 +1,6 @@
 # Quick Tray
 
-[English](README.md) | [한국어](README.ko.md)
+English | [한국어](README.ko.md)
 
 Quick Tray keeps Obsidian available from the system tray and adds quick note/search actions.
 
@@ -43,4 +43,4 @@ VaultFolder/.obsidian/plugins/quick-tray/
 
 Tray and OS-wide shortcuts depend on Electron desktop APIs. If those APIs are unavailable in your Obsidian build, Quick Tray commands still appear in the command palette.
 
-The bundled default tray image is the Obsidian icon for use with Obsidian. The Obsidian logo remains the property of the Obsidian project.
+By default, Quick Tray uses the current Obsidian app icon for the tray icon. The Obsidian logo remains the property of the Obsidian project.
