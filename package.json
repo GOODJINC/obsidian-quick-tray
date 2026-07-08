@@ -1,6 +1,6 @@
 {
 	"name": "obsidian-quick-tray",
-	"version": "0.1.0",
+	"version": "1.0.0",
 	"description": "Keep Obsidian available from the Windows tray with quick notes, quick search, and configurable shortcuts.",
 	"main": "main.js",
 	"type": "module",
