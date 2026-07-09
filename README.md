@@ -4,6 +4,8 @@ English | [한국어](https://github.com/GOODJINC/obsidian-quick-tray/blob/main/
 
 Quick Tray keeps Obsidian available from the system tray and adds quick note/search actions.
 
+Community plugin: https://community.obsidian.md/plugins/quick-tray
+
 ## Screenshot
 
 ![Quick Tray settings and tray menu](assets/screenshot.png)
@@ -31,7 +33,20 @@ Quick Tray keeps Obsidian available from the system tray and adds quick note/sea
 - `{{timestamp}}`: `YYYYMMDDHHmmss`
 - `{{title}}`: note title
 
-## Install Manually
+## Installation
+
+Install Quick Tray from Obsidian's community plugin browser:
+
+1. Open `Settings`.
+2. Go to `Community plugins`.
+3. Search for `Quick Tray`.
+4. Install and enable the plugin.
+
+You can also open the plugin listing directly:
+
+https://community.obsidian.md/plugins/quick-tray
+
+## Manual Install
 
 1. Run `npm install`.
 2. Run `npm run build`.

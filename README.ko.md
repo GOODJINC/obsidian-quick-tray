@@ -4,6 +4,8 @@
 
 Quick Tray는 Obsidian을 시스템 트레이에서 계속 사용할 수 있게 하고, 빠른 노트와 빠른 검색 기능을 추가하는 데스크톱 전용 플러그인입니다.
 
+커뮤니티 플러그인: https://community.obsidian.md/plugins/quick-tray
+
 ## 스크린샷
 
 ![Quick Tray 설정과 트레이 메뉴](assets/screenshot.png)
@@ -30,6 +32,19 @@ Quick Tray는 Obsidian을 시스템 트레이에서 계속 사용할 수 있게 
 - `{{time}}`: `HH-mm`
 - `{{timestamp}}`: `YYYYMMDDHHmmss`
 - `{{title}}`: 노트 제목
+
+## 설치
+
+Obsidian 커뮤니티 플러그인 브라우저에서 Quick Tray를 설치할 수 있습니다.
+
+1. `설정`을 엽니다.
+2. `커뮤니티 플러그인`으로 이동합니다.
+3. `Quick Tray`를 검색합니다.
+4. 플러그인을 설치하고 활성화합니다.
+
+플러그인 페이지를 직접 열 수도 있습니다.
+
+https://community.obsidian.md/plugins/quick-tray
 
 ## 수동 설치
 
