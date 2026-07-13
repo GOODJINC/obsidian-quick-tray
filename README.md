@@ -58,8 +58,12 @@ VaultFolder/.obsidian/plugins/quick-tray/
 
 4. Enable `Quick Tray` in Obsidian community plugins.
 
-## Notes
+## Known limitations
 
-Tray and OS-wide shortcuts depend on Electron desktop APIs. If those APIs are unavailable in your Obsidian build, Quick Tray commands still appear in the command palette.
+- Quick Tray is designed for Windows desktop environments.
+- Global shortcuts may fail to register when a shortcut is already in use or restricted by Electron or Windows.
+- Quick Tray works only while Obsidian is running. It cannot start or control Obsidian after the application has been fully quit.
+
+## Notes
 
 By default, Quick Tray uses the current Obsidian app icon for the tray icon. The Obsidian logo remains the property of the Obsidian project.

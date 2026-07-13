@@ -58,8 +58,12 @@ VaultFolder/.obsidian/plugins/quick-tray/
 
 4. Obsidian 커뮤니티 플러그인에서 `Quick Tray`를 활성화합니다.
 
-## 참고
+## 알려진 제한 사항
 
-트레이와 OS 전역 단축키는 Electron 데스크톱 API에 의존합니다. 사용 중인 Obsidian 빌드에서 해당 API를 사용할 수 없으면 Quick Tray 명령은 명령 팔레트에서만 사용할 수 있습니다.
+- Quick Tray는 Windows 데스크톱 환경을 대상으로 합니다.
+- 글로벌 단축키는 이미 다른 프로그램에서 사용 중이거나 Electron 또는 Windows 정책에 의해 제한되는 경우 등록되지 않을 수 있습니다.
+- Quick Tray는 Obsidian이 실행 중인 동안에만 동작합니다. Obsidian을 완전히 종료한 상태에서 실행하거나 제어할 수는 없습니다.
+
+## 참고
 
 기본 트레이 아이콘은 현재 Obsidian 앱 아이콘을 사용합니다. Obsidian 로고의 권리는 Obsidian 프로젝트에 있습니다.
